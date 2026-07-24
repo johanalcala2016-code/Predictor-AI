@@ -1,0 +1,18 @@
+Gender,Married,Education,ApplicantIncome,CoapplicantIncome,LoanAmount,Loan_Amount_Term,Credit_History,Loan_Status
+Male,No,Graduate,5849,0,128,360,1,Y
+Male,Yes,Graduate,4583,1508,128,360,1,N
+Male,Yes,Graduate,3000,0,66,360,1,Y
+Male,Yes,Not Graduate,2583,2358,120,360,1,Y
+Male,No,Graduate,6000,0,141,360,1,Y
+Male,Yes,Graduate,5417,4196,267,360,1,Y
+Male,Yes,Not Graduate,2333,1516,95,360,1,Y
+Male,Yes,Graduate,3036,2504,158,360,0,N
+Male,Yes,Graduate,4006,1526,168,360,1,Y
+Male,Yes,Graduate,12841,10968,349,360,1,N
+Male,Yes,Graduate,3200,0,70,360,1,Y
+Male,No,Graduate,2500,1840,109,360,1,Y
+Female,No,Graduate,2083,3150,128,360,1,Y
+Female,No,Graduate,1853,2840,114,360,1,N
+Male,Yes,Graduate,1299,1086,17,120,1,Y
+Female,No,Not Graduate,1948,0,115,360,1,Y
+Female,No,Graduate,2237,0,63,360,0,N
