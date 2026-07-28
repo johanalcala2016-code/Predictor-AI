@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="card-title mb-0">Solicitud de Crédito / Préstamo</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Género</label>
+                        {{ form.gender }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Estado Civil</label>
+                        {{ form.married }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nivel Educativo</label>
+                        {{ form.education }}
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-success">Enviar Solicitud</button>
+                        <a href="{% url 'home' %}" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
