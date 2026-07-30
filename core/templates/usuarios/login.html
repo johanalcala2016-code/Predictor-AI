@@ -8,6 +8,18 @@
                 <h4 class="card-title mb-0">Iniciar Sesión</h4>
             </div>
             <div class="card-body">
+                <!-- Muestra alerta si las credenciales fallan o la cuenta no existe -->
+                {% if form.errors or messages %}
+                    <div class="alert alert-danger py-2">
+                        {% if form.errors %}
+                            Usuario o contraseña incorrectos.
+                        {% endif %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
                 <form method="POST">
                     {% csrf_token %}
                     <div class="mb-3">

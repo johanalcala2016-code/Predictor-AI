@@ -10,20 +10,43 @@
             <div class="card-body">
                 <form method="POST">
                     {% csrf_token %}
-                    
+    
                     <div class="mb-3">
                         <label class="form-label fw-bold">Género</label>
                         {{ form.gender }}
                     </div>
+    
                     <div class="mb-3">
                         <label class="form-label fw-bold">Estado Civil</label>
                         {{ form.married }}
                     </div>
+    
                     <div class="mb-3">
                         <label class="form-label fw-bold">Nivel Educativo</label>
                         {{ form.education }}
                     </div>
-
+    
+    <!-- Campos Financieros requeridos por el modelo de IA -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Ingreso del Solicitante</label>
+                        {{ form.applicant_income }}
+                    </div>
+    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Ingreso del Co-solicitante</label>
+                        {{ form.coapplicant_income }}
+                    </div>
+    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Monto del Préstamo (en miles)</label>
+                        {{ form.loan_amount }}
+                    </div>
+    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Historial Crediticio</label>
+                        {{ form.credit_history }}
+                    </div>
+    
                     <div class="d-grid gap-2 mt-4">
                         <button type="submit" class="btn btn-success">Enviar Solicitud</button>
                         <a href="{% url 'home' %}" class="btn btn-outline-secondary">Cancelar</a>

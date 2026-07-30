@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib import messages
 import os
 import joblib
 import pandas as pd
@@ -49,14 +51,18 @@ def crear_solicitud(request):
             applicant_income = form.cleaned_data.get('applicant_income', 0)
             coapplicant_income = form.cleaned_data.get('coapplicant_income', 0)
             loan_amount = form.cleaned_data.get('loan_amount', 0) 
-            credit_history = 1 if form.cleaned_data.get('credit_history') in [1, '1', True, 'Yes', 'Good'] else 0
+            # Extraemos la opción seleccionada (0, 1 o 2)
+            credit_history_raw = int(form.cleaned_data['credit_history'])
+            
+            # Mapeo: Si eligió 0 (Malo) o 2 (Sin historial), mandamos 0 a la IA. Si eligió 1 (Bueno), mandamos 1.
+            credit_history_ia = 0 if credit_history_raw in [0, 2] else 1
         
             # 2. Construir el vector de entrada exacto
             input_ia = pd.DataFrame([{
                 'ApplicantIncome': applicant_income,
                 'CoapplicantIncome': coapplicant_income,
                 'LoanAmount': loan_amount,
-                'Credit_History': credit_history,
+                'Credit_History': credit_history_ia,  # <--- Usamos esta variable
             }])
 
             # 3. Predicción con el modelo real cargado
@@ -80,3 +86,21 @@ def detalle_solicitud(request, pk):
     """Muestra la tarjeta de dictamen final de una solicitud específica"""
     solicitud = get_object_or_404(SolicitudPrestamo, pk=pk)
     return render(request, 'core/detalle.html', {'solicitud': solicitud})
+
+def login_view(request):
+    """Vista personalizada para inicio de sesión"""
+    if request.method == 'POST':
+        u = request.POST.get('username')
+        p = request.POST.get('password')
+        
+        user = authenticate(request, username=u, password=p)
+        
+        if user is not None:
+            auth_login(request, user)
+            # Redirige a la URL previa ('next') o al 'home'
+            next_url = request.GET.get('next', 'home')
+            return redirect(next_url)
+        else:
+            messages.error(request, "Usuario o contraseña incorrectos.")
+            
+    return render(request, 'usuarios/login.html')
